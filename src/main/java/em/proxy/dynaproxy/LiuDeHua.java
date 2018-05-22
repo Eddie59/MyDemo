@@ -1,4 +1,4 @@
-package em.proxy;
+package em.proxy.dynaproxy;
 
 /**
  * LiuDeHua class

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+       http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+">
+
+    <import resource="classpath:transaction/transaction.xml"/>
+
+    <bean id="addressService" class="spring.transaction.service.declare.DeclareAddressServiceImpl">
+        <property name="txmanager" ref="transactionManager"/>
+        <property name="addressDao" ref="addressDao"/>
+    </bean>
+
+    <bean id="userService" class="spring.transaction.service.declare.DeclareUserServiceImpl">
+        <property name="txManager" ref="transactionManager"/>
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*"
+                       propagation="REQUIRED"
+                       isolation="READ_COMMITTED"
+                       read-only="false"
+                       timeout="-1"
+            />
+            <tx:method name="*" propagation="REQUIRED" isolation="READ_COMMITTED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="serviceMethod" expression="execution(* spring.transaction.service.declare.*.*(..))"/>
+        <aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
+    </aop:config>
+
+</beans>

@@ -1,4 +1,4 @@
-package em.proxy;
+package em.proxy.dynaproxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
