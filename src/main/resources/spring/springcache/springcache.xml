@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+       http://www.springframework.org/schema/cache
+http://www.springframework.org/schema/cache/spring-cache.xsd
+
+">
+
+    <context:component-scan base-package="spring.springcache.springinner"/>
+
+    <cache:annotation-driven/>
+
+    <!--SimpleCacheManager只是设置caches，获取caches，-->
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <!--ConcurrentMapCacheFactoryBean实现了我们自己定义的CacheContext类-->
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="accountCache"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+
+
+    <bean id="myCacheManager" class="spring.springcache.springinner.MyCacheManager">
+        <property name="caches">
+            <set>
+                <bean class="spring.springcache.springinner.MyCache">
+                    <property name="name" value="myAccountCache"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+
+
+</beans>
