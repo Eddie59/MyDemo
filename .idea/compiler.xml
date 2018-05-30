@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="JavaLearn" />
+        <module name="MyDemo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="JavaLearn" target="9" />
+      <module name="MyDemo" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>
