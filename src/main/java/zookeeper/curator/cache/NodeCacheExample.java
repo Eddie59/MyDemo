@@ -31,7 +31,7 @@ public class NodeCacheExample {
                 client.create().creatingParentsIfNeeded().forPath(PATH);
             }
 
-            //创建、删除节点，并不会出发通知
+
             final NodeCache cache = new NodeCache(client, PATH);
             cache.getListenable().addListener(() -> {
                 ChildData childData = cache.getCurrentData();
