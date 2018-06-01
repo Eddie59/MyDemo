@@ -4,7 +4,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- *
+ * 不公平锁
  * 使用ReentrantLock来现实等待、通知。一个Lock对象里面可以创建多个Condition实例，线程对象可以注册在指定的Condition实例中了，
  * 从而有选择地通知wait线程，也就相当于使用Condition实例，给wait线程分类，然后按类别通知wait线程
  * 使用synchronized来现实等待、通知，就相当于一个Condition实例，所有的wait线程只有一个组中，只能全部通知所有的wait线程，
