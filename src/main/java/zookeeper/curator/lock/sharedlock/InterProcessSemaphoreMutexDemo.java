@@ -5,7 +5,6 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.locks.InterProcessSemaphoreMutex;
 import org.apache.curator.retry.ExponentialBackoffRetry;
-import org.apache.curator.test.TestingServer;
 import org.apache.curator.utils.CloseableUtils;
 import zookeeper.curator.lock.sharedreentrantlock.FakeLimitedResource;
 
