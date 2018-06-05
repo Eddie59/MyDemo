@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="JavaLearn" target="9" />
-      <module name="MyDemo" target="9" />
+      <module name="MyDemo" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
