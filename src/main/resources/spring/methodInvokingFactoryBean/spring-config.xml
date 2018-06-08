@@ -3,7 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
+    <!--调用静态方法，返回值作为bean （1）-->
+    <!--因为MethodInvokingFactoryBean，在初始化bean时，会调用targetClass 的 targetMethod方法，把返回值作为bean，id为staticFunc1-->
+    <!--app.getBean("staticFunc1", Properties.class)得到的为方法返回的结果-->
     <bean id="staticFunc1" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetClass">
             <value>java.lang.System</value>
@@ -12,7 +14,7 @@
             <value>getProperties</value>
         </property>
     </bean>
-
+    <!--调用静态方法，返回值作为bean （2）-->
     <bean id="staticFunc2" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="staticMethod">
             <value>java.lang.System.getProperties</value>
@@ -20,6 +22,7 @@
     </bean>
 
 
+    <!--调用实例方法，返回值作为bean(1)-->
     <bean id="javaVersion" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject" ref="staticFunc2"/>
         <property name="targetMethod" value="getProperty"/>
@@ -30,6 +33,7 @@
         </property>
     </bean>
 
+    <!--调用实例方法，返回值作为bean的属性(2)-->
     <bean id="son1" class="spring.methodInvokingFactoryBean.Son">
         <property name="age" value="10"/>
     </bean>
