@@ -17,8 +17,7 @@
 
     <context:property-placeholder location="classpath:db.properties"/>
 
-
-    <mvc:annotation-driven validator="validator">
+    <mvc:annotation-driven>
         <mvc:argument-resolvers>
         </mvc:argument-resolvers>
         <!--    <mvc:message-converters>
@@ -41,11 +40,6 @@
     <mvc:resources mapping="/upload/**" location="/upload/"/>
 
 
-    <!--校验工厂-->
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
-        <property name="validationMessageSource" ref="messageSource"/>
-    </bean>
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
         <property name="defaultEncoding" value="utf-8"/>

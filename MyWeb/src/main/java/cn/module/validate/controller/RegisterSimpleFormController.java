@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /**
@@ -34,7 +35,7 @@ public class RegisterSimpleFormController {
     }
 
 
-
+    @ResponseBody
     @RequestMapping(value = "/validator", method = RequestMethod.POST)
     public String submitForm(@Validated UserModel user, Errors errors) {
 

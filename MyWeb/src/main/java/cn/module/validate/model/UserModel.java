@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 public class UserModel {
     @NotNull(message="{username.not.empty}")
     private String username;
+
     @NotNull()
     @Size(min=6 ,max= 20 ,message = "密码长度不符合标准")
     private String password;
