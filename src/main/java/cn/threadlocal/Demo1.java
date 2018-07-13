@@ -10,7 +10,7 @@ import java.util.List;
  * @date
  */
 public class Demo1 {
-    private static ThreadLocal<Integer> local=new ThreadLocal<>(){
+    private static ThreadLocal<Integer> local=new ThreadLocal<Integer>(){
         @Override
         protected Integer initialValue() {
             return 0;

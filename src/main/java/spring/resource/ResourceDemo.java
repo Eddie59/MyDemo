@@ -7,12 +7,12 @@ import java.io.File;
 import java.io.InputStream;
 
 /**
- * ByteArrayResourceDemo class
+ * ResourceDemo class
  *
  * @author Administrator
  * @date
  */
-public class ByteArrayResourceDemo {
+public class ResourceDemo {
 
     @Test
     public void byteArrayResourceRun() {
@@ -62,6 +62,7 @@ public class ByteArrayResourceDemo {
             System.out.println(new String(bytes));
         }
     }
+
 
 
 }

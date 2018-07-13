@@ -11,15 +11,14 @@ import org.junit.Test;
 public class BoundedBufferSyn {
     final int[] items = new int[2];
 
-    int putptr,
-            takeptr,
-            count;
+    int putptr, takeptr, count;
 
     synchronized public void put(int x) {
         // 如果是full，则让这个企图put的线程等待
         while (count == items.length) {
             System.out.printf("----FULL---- The buffer is full!  %s has to wait.\n", Thread.currentThread().getName());
             // 这里的wait和Condition的await在功能上没有什么区别，重点在唤醒
+            //当前线程wait，并释放synchronized锁，等待被唤醒
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -34,7 +33,7 @@ public class BoundedBufferSyn {
         }
         ++count;
         System.out.println(Thread.currentThread().getName() + " has put");
-        // 唤醒所有等待线程，让它们再去抢一次锁，而无法只通知take特性的线程
+        // 唤醒所有等待线程，包括存的和取的，让它们再去抢一次锁，而无法只通知take特性的线程
         notifyAll();
     }
 
@@ -55,7 +54,7 @@ public class BoundedBufferSyn {
         }
         --count;
         System.out.println(Thread.currentThread().getName() + " has take");
-        //唤醒所有等待线程，让它们再去抢一次锁，而无法只通知put特性的线程
+        //唤醒所有等待线程，包括存的和取的,让它们再去抢一次锁，而无法只通知put特性的线程
         notifyAll();
         return x;
     }

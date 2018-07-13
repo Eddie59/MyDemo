@@ -159,5 +159,18 @@
       <artifactId>curator-test</artifactId>
       <version>RELEASE</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>4.1.24.Final</version>
+    </dependency>
+
   </dependencies>
 </project>

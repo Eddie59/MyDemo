@@ -12,7 +12,7 @@ import java.util.List;
  * @date
  */
 public class DateUtil2_1 {
-    private static ThreadLocal<SimpleDateFormat> local = new ThreadLocal<>() {
+    private static ThreadLocal<SimpleDateFormat> local = new ThreadLocal<SimpleDateFormat>() {
         @Override
         protected SimpleDateFormat initialValue() {
             return new SimpleDateFormat("yyyy-MM-dd");
