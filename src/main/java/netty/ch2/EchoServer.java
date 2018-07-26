@@ -25,11 +25,13 @@ public class EchoServer {
 
     public void start() throws Exception {
         final EchoServerHandler serverHandler = new EchoServerHandler();
-        //事件处理，接受新连接读写数据等
-        EventLoopGroup group = new NioEventLoopGroup();
+        //1个eventLoop的eventLoopGroup用于转发请求
+        //3个eventLoop的eventLoopGroup用于处理请求
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        EventLoopGroup workGroup=new NioEventLoopGroup(3);
         try {
             ServerBootstrap b = new ServerBootstrap();
-            b.group(group)
+            b.group(bossGroup,workGroup)
                     .channel(NioServerSocketChannel.class)
                     .localAddress(new InetSocketAddress(port))
                     //ChannelInitializer类，一个新的连接被接受时，会创建一个子Handle，一个Handle包含一个Channelpipleline
@@ -48,7 +50,8 @@ public class EchoServer {
 
         } finally {
             //channel关闭以后，就可以整个关闭了
-            group.shutdownGracefully().sync();
+            bossGroup.shutdownGracefully().sync();
+            workGroup.shutdownGracefully().sync();
         }
     }
 
