@@ -51,19 +51,21 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--去掉Generator生成的example,%表示匹配所有的表，rootClass为生成domain类的父类-->
+<!--
+        &lt;!&ndash;去掉Generator生成的example,%表示匹配所有的表，rootClass为生成domain类的父类&ndash;&gt;
         <table tableName="%"
                enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false">
             <property name="rootClass" value="com.em.mybatisgj.domain.BaseEntity" />
         </table>
-        <!--按以下规则重新生成user-->
+        &lt;!&ndash;按以下规则重新生成user&ndash;&gt;
         <table tableName="user" domainObjectName="User"
                enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false">
             <property name="rootClass" value="com.em.mybatisgj.domain.BaseEntity" />
-            <!--自增id-->
+            &lt;!&ndash;自增id&ndash;&gt;
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <ignoreColumn column="address"/>
         </table>
+-->
 
 
     </context>

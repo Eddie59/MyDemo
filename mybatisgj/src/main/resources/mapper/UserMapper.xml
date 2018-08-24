@@ -12,7 +12,7 @@
   </resultMap>
 
 
-    <select id="queryUserList" resultType="com.em.mybatisgj.domain.User">
+    <select id="queryUserList" resultType="com.em.mybatisgj.domain.User" parameterType="java.util.Map">
         SELECT * FROM USER WHERE 1=1
         <if test="username!=null and username!=''">
             and username LIKE CONCAT('%',#{username},'%')
