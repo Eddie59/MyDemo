@@ -42,7 +42,7 @@ public class MybatisConf {
     public SqlSessionFactoryBean getFactoryBean() {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setConfigLocation(new ClassPathResource("mybatis-config.properties"));
+        factoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
         factoryBean.setTypeAliasesPackage("com.em.mybatisgj.domain");
         try {
             ResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
@@ -60,6 +60,9 @@ public class MybatisConf {
         return new SqlSessionTemplate(sqlSessionFactory, ExecutorType.SIMPLE);
     }
 
+    /**
+     * 分页插件
+     */
     @Bean
     public PageHelper pageHelper(DataSource dataSource) {
         PageHelper pageHelper = new PageHelper();
@@ -71,22 +74,6 @@ public class MybatisConf {
         return pageHelper;
     }
 
-
-    @Bean
-    public MapperScannerConfigurer mapperScannerConfigurer() {
-        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setSqlSessionFactoryBeanName("factoryBean");
-        //每张表对应的XXMapper.java interface类型的Java文件
-        mapperScannerConfigurer.setBasePackage("com.em.mybatisgj.common");
-
-        Properties properties = new Properties();
-        properties.setProperty("mappers", "com.em.mybatisgj.common.MyMapper");
-        properties.setProperty("notEmpty", "false");
-        properties.setProperty("IDENTITY", "MYSQL");
-        mapperScannerConfigurer.setProperties(properties);
-
-        return mapperScannerConfigurer;
-    }
 
     @Bean(name = "transactionManager")
     public DataSourceTransactionManager getTransactionManager() {

@@ -24,8 +24,9 @@ public class MybatisgjApplicationTests {
 	public void addUser(){
 		User oneUser=new User();
 		oneUser.setSex("1");
-		oneUser.setUsername("abc");
+		oneUser.setUsername("abcd");
 		oneUser.setBirthday(new Date());
+
 		int i= userService.save(oneUser);
 		System.out.println(i);
 	}
@@ -37,6 +38,14 @@ public class MybatisgjApplicationTests {
 
 		List<User> users= userService.queryUserList(condition);
 		System.out.println(users);
+
+		User oneUser=new User();
+		oneUser.setSex("1");
+		oneUser.setUsername("abcd");
+		oneUser.setBirthday(new Date());
+		int i= userService.save(oneUser);
+		System.out.println(i);
+
 	}
 
 

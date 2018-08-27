@@ -1,5 +1,6 @@
 package com.em.mybatisgj.service.impl;
 
+import com.em.mybatisgj.common.MyMapper;
 import com.em.mybatisgj.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
@@ -14,8 +15,11 @@ import java.util.List;
  */
 public abstract class BaseService<T> implements IService<T> {
 
+    /**
+     * 
+     */
     @Autowired
-    protected Mapper<T> mapper;
+    protected MyMapper<T> mapper;
 
     public Mapper<T> getMapper() {
         return mapper;
