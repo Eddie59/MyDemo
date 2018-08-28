@@ -16,7 +16,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -44,6 +43,7 @@ public class MybatisConf {
         factoryBean.setDataSource(dataSource);
         factoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
         factoryBean.setTypeAliasesPackage("com.em.mybatisgj.domain");
+
         try {
             ResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
             Resource[] mappers = patternResolver.getResources("classpath:mapper/*.xml");

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.em.mybatisgj.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.em.mybatisgj.domain.User">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="birthday" jdbcType="DATE" property="birthday" />
-    <result column="sex" jdbcType="CHAR" property="sex" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.em.mybatisgj.domain.User">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+    </resultMap>
 
     <select id="queryUserList" resultType="com.em.mybatisgj.domain.User" parameterType="java.util.Map">
         SELECT * FROM USER WHERE 1=1
@@ -20,5 +20,14 @@
             and sex ='#{sex}'
         </if>
     </select>
+
+    <select id="findUsers" resultType="com.em.mybatisgj.domain.User">
+        select * from `user`
+    </select>
+
+    <select id="findUsersByModel" parameterType="com.em.mybatisgj.model.PageModel" resultType="com.em.mybatisgj.domain.User">
+        select * from `user`
+    </select>
+
 
 </mapper>
