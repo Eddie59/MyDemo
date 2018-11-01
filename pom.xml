@@ -8,6 +8,7 @@
     <modules>
       <module>MyWeb</module>
         <module>startpom</module>
+      <module>pubsub</module>
     </modules>
     <packaging>pom</packaging>
 

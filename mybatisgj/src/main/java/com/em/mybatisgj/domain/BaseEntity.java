@@ -9,5 +9,5 @@ import java.io.Serializable;
  * @date
  */
 public class BaseEntity implements Serializable{
-
+    private static final long serialVersionUID = 1L;
 }
