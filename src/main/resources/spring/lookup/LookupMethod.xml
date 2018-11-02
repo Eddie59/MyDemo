@@ -9,8 +9,10 @@
     <bean id="fruitPlate1" class="spring.lookup.FruitPlate">
         <lookup-method name="getFruit" bean="apple"/>
     </bean>
+
     <bean id="fruitPlate2" class="spring.lookup.FruitPlate">
         <lookup-method name="getFruit" bean="banana"/>
     </bean>
+
 
 </beans>

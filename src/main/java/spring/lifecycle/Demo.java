@@ -13,7 +13,7 @@ public class Demo {
     public static void main(String... args) {
 
 //        Resource res=new ClassPathResource("PersonConfig.xml");
-//        BeanFactory bf=new XmlBeanFactory(res);
+//        MyBeanFactory bf=new XmlBeanFactory(res);
 //        ((ConfigurableBeanFactory)bf).addBeanPostProcessor(new MyInstantiationAwareBeanPostProcessor());
 
         ApplicationContext bf=new ClassPathXmlApplicationContext("spring/lifecycle/PersonConfig.xml");
