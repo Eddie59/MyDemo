@@ -11,10 +11,6 @@ public class HelloService {
 
     private String msg;
 
-    public String sayHello() {
-        return "hi:" + msg;
-    }
-
     public String getMsg() {
         return msg;
     }
@@ -22,4 +18,12 @@ public class HelloService {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+
+
+    public String sayHello() {
+        return "hi:" + msg;
+    }
+
+
 }

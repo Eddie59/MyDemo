@@ -18,7 +18,6 @@ import org.springframework.core.io.support.ResourcePropertySource;
 public class AppConf2 {
     @Bean
     public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() throws Exception {
-
         PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
         PropertySource propertySource = new ResourcePropertySource("ResourcePropertySource", "classpath:/spring/environment/conf.properties");
 //        configurer.setPropertySources(propertySource);
