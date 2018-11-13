@@ -16,27 +16,27 @@ public class MyInstantiationAwareBeanPostProcessor extends InstantiationAwareBea
     @Override
     public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
 
-        System.out.println("postProcessBeforeInstantiation");
+        System.out.println("MyInstantiationAwareBeanPostProcessor postProcessBeforeInstantiation");
         return super.postProcessBeforeInstantiation(beanClass, beanName);
     }
 
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-        System.out.println("postProcessAfterInstantiation");
+        System.out.println("MyInstantiationAwareBeanPostProcessor postProcessAfterInstantiation");
 
         return super.postProcessAfterInstantiation(bean, beanName);
     }
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("postProcessBeforeInitialization");
+        System.out.println("MyInstantiationAwareBeanPostProcessor postProcessBeforeInitialization");
 
         return super.postProcessBeforeInitialization(bean, beanName);
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("postProcessAfterInitialization");
+        System.out.println("MyInstantiationAwareBeanPostProcessor postProcessAfterInitialization");
 
         return super.postProcessAfterInitialization(bean, beanName);
     }
