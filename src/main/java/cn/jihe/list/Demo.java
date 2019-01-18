@@ -26,16 +26,32 @@ public class Demo {
 
     @Test
     public void set(){
-        Set<Person> personSet=new HashSet<>();
+        Set<Person> personSet=new HashSet<Person>();
     }
 
     @Test
     public void dic(){
-        Map<String,Person> map=new HashMap<>();
+        Map<String,Person> map=new HashMap<String,Person>();
         Person p1=new Person(1,"a",1);
         map.put("a",p1);
         Person p2=new Person(1,"b",1);
         map.put("a",p2);
         System.out.println(map);
     }
+
+    @Test
+    public void test(){
+        ArrayList al=new ArrayList();
+
+        ArrayList list=new ArrayList();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+
+        System.out.println(list.size());
+        list.ensureCapacity(100);
+        System.out.println(list.size());
+    }
+
 }

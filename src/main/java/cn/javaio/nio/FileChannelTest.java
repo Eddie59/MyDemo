@@ -23,7 +23,8 @@ public class FileChannelTest {
     public void writeFile() throws Exception {
         RandomAccessFile accessFile = new RandomAccessFile("E://file1.txt", "rw");
         FileChannel fc = accessFile.getChannel();
-        //每次把channel的position设置到文件最好，从最后位置开始写入
+
+        //每次把channel的position设置到文件最好，从最后位置开始写入，每次都append到文件最后
         fc.position(accessFile.length());
         ByteBuffer byteBuffer = ByteBuffer.wrap("abc             ".getBytes());
         printBuffer(byteBuffer);
@@ -42,6 +43,7 @@ public class FileChannelTest {
         //从0处开始写到limit位置
         fc.write(byteBuffer);
 
+        printChannel(fc);
         fc.close();
     }
 
@@ -55,12 +57,12 @@ public class FileChannelTest {
             int n = 0;
             //从fileChannel读数据到byteBuffer，每次读取5个byte
             while (fileChannel.read(byteBuffer) != -1) {
-                //数据准备好了
+                //数据准备好了,可以读了
                 byteBuffer.flip();
                 while (byteBuffer.hasRemaining()) {
                     System.out.println((char) byteBuffer.get());
                 }
-                //数据使用过以后，把指针复位
+                //数据使用过以后，把指针复位，表示可以从头开始写了
                 byteBuffer.clear();
             }
         } catch (FileNotFoundException e) {
@@ -88,10 +90,13 @@ public class FileChannelTest {
         }
     }
 
+    /**
+     *  通过nio读取文件，并写入另一文件中
+     *  使用了，从通道channel中读取数据，然后写入通道channel中
+     */
     @Test
     public void run() throws Exception {
-        String filePath = "cn/javaio/a.txt";
-        Resource resource = new ClassPathResource(filePath);
+        Resource resource = new ClassPathResource("log4j.xml");
         File f = resource.getFile();
         //Channel是从传统流中获取的
         try (FileChannel inputChannel = new FileInputStream(f).getChannel();

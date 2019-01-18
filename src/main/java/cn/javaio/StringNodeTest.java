@@ -12,6 +12,7 @@ import java.io.StringWriter;
 public class StringNodeTest {
 
     public static void main(String... args) {
+
         String src = "从今天 起做一个幸福的人，/n" +
                 "喂马，劈柴，周游世界，" +
                 "我有一所房子，面朝大海，春暖花开，" +
