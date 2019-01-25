@@ -8,4 +8,6 @@ package spring.factorybean;
  */
 public interface IPerson {
     void sayHi();
+    void sayName();
+    void sayAge();
 }

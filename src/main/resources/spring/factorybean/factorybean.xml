@@ -11,7 +11,6 @@
     <bean id="logFactoryBean" class="spring.factorybean.LogFactoryBean">
         <property name="target" ref="person"/>
         <property name="interfaceName" value="spring.factorybean.IPerson"/>
-
     </bean>
 
 

@@ -6,6 +6,7 @@ public class Entity {
 
     private Date date;
 
+
     public Date getDate() {
         return date;
     }

@@ -12,7 +12,17 @@ public class Person implements IPerson {
 
     @Override
     public void sayHi(){
-        System.out.println("Hi");
+        System.out.println("Hi its person instance");
+    }
+
+    @Override
+    public void sayAge() {
+        System.out.println("My age is "+this.age);
+    }
+
+    @Override
+    public void sayName() {
+        System.out.println("My name is "+this.name);
     }
 
     public void setAge(int age) {

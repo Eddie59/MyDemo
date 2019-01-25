@@ -10,13 +10,14 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 ">
 
-   <!-- <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
         <property name="customEditors">
             <map>
                 <entry key="java.util.Date" value="spring.propertyeditor.DateEditor"/>
             </map>
         </property>
-    </bean>-->
+    </bean>
+
     <bean id="entity" class="spring.propertyeditor.Entity">
         <property name="date" value="2018-06-08"/>
     </bean>

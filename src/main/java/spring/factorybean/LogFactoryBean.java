@@ -14,6 +14,9 @@ import java.lang.reflect.Proxy;
  * @date
  */
 public class LogFactoryBean implements FactoryBean<Object> {
+    /**
+     * 接口名
+     */
     private String interfaceName;
     /**
      * 代理对象
@@ -27,7 +30,12 @@ public class LogFactoryBean implements FactoryBean<Object> {
     @Nullable
     @Override
     public Object getObject() throws Exception {
+
         System.out.println("getObject");
+
+        //要在target的所有方法前后加上Log
+        //那么不可能直接使用target实例，所以要使用生成一个target的代理对象，在代理中调用target的方法，在方法前后输出日志
+        //调用app.GetBean()时，会返回一个target的代理对象，调用代理对象的方法时，会调用下面的invoke
         proxyObj = Proxy.newProxyInstance(
                 this.getClass().getClassLoader(),
                 new Class[]{Class.forName(interfaceName)},
@@ -69,14 +77,6 @@ public class LogFactoryBean implements FactoryBean<Object> {
 
     public String getInterfaceName() {
         return interfaceName;
-    }
-
-    public void setProxyObj(Object proxyObj) {
-        this.proxyObj = proxyObj;
-    }
-
-    public Object getProxyObj() {
-        return proxyObj;
     }
 
     public Object getTarget() {
