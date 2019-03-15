@@ -2,7 +2,9 @@ package cn;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.Callable;
 
 /**
  * Del1 class
@@ -12,15 +14,24 @@ import java.util.HashMap;
  */
 public class Del1 {
     @Test
-    public void test(){
-        HashMap<String,String> hm=new HashMap<>();
-        hm.put("a","aval");
-        hm.put("b","bval");
+    public void test() throws Exception{
 
-        for (String key:hm.keySet()){
-            System.out.println(key);
-            System.out.println(hm.get(key));
-        }
+        new Thread(()->{
+            System.out.println("1");
+        }).start();
 
+        Thread thread=new Thread(new MyRun());
+        thread.start();
+        thread.join();
+
+
+    }
+}
+
+
+class MyRun implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("a");
     }
 }

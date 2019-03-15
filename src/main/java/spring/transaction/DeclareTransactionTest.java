@@ -45,7 +45,7 @@ public class DeclareTransactionTest {
 
     @Before
     public void init() {
-        String[] config = new String[]{"classpath:transaction/transaction.xml","classpath:transaction/transaction-declare.xml"};
+        String[] config = new String[]{"classpath:spring/transaction/transaction.xml","classpath:spring/transaction/transaction-declare.xml"};
         ctx = new ClassPathXmlApplicationContext(config);
         txManager = ctx.getBean(PlatformTransactionManager.class);
         dataSource = ctx.getBean(DataSource.class);

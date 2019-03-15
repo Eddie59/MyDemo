@@ -10,7 +10,7 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 ">
 
-    <import resource="classpath:transaction/transaction.xml"/>
+    <import resource="classpath:spring/transaction/transaction.xml"/>
 
     <bean id="addressService" class="spring.transaction.service.code.CodeAddressServiceImpl">
         <property name="addressDao" ref="addressDao"/>

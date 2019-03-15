@@ -10,7 +10,7 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 ">
 
-    <import resource="classpath:transaction/transaction.xml"/>
+    <import resource="classpath:spring/transaction/transaction.xml"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>

@@ -53,7 +53,8 @@ public class CodeTransactionTest {
 
     @Before
     public void init() {
-        String[] config = new String[]{"classpath:transaction/transaction.xml","transaction/transaction-code.xml"};
+        String[] config = new String[]{"classpath:spring/transaction/transaction.xml","classpath:spring/transaction/transaction-code.xml"};
+
         ctx = new ClassPathXmlApplicationContext(config);
         txManager = ctx.getBean(PlatformTransactionManager.class);
         dataSource = ctx.getBean(DataSource.class);
@@ -61,34 +62,43 @@ public class CodeTransactionTest {
     }
 
 
+    /**
+     * 使用低级别方案JdbcTemplate来进行事务管理器测试
+     */
     @Test
     public void testPlatformTransactionManagerForLowLevel1() {
+        //定义一个事务
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        def.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
+        //事务隔离级别
+        def.setIsolationLevel(TransactionDefinition.ISOLATION_REPEATABLE_READ);
+        //支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择，也是 Spring 默认的事务的传播
         def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-
+        //返回一个已经激活的事务或创建一个新的事务（根据给定的TransactionDefinition类型参数定义的事务属性）
         TransactionStatus status = txManager.getTransaction(def);
 
-        Connection conn = DataSourceUtils.getConnection(dataSource);
-
         try {
+            Connection conn = DataSourceUtils.getConnection(dataSource);
             PreparedStatement preparedStatement = conn.prepareStatement(CREATE_TABLE_SQL);
             preparedStatement.execute();
 
-            PreparedStatement pstmt = conn.prepareStatement(INSERT_SQL);
-            pstmt.setString(1, "test");
-            pstmt.execute();
+            preparedStatement = conn.prepareStatement(INSERT_SQL);
+            preparedStatement.setString(1, "test");
+            preparedStatement.execute();
 
             conn.prepareStatement(DROP_TABLE_SQL).execute();
 
             txManager.commit(status);
         } catch (Exception exp) {
+            System.out.println(exp);
             status.setRollbackOnly();
             txManager.rollback(status);
         }
     }
 
 
+    /**
+     * 使用高级别方案JdbcTemplate来进行事务管理器测试
+     */
     @Test
     public void testPlatformTransactionManagerForHighLevel() {
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -97,11 +107,12 @@ public class CodeTransactionTest {
 
         TransactionStatus status = txManager.getTransaction(def);
 
-        jdbcTemplate.execute(CREATE_TABLE_SQL);
         try {
+            jdbcTemplate.execute(CREATE_TABLE_SQL);
             jdbcTemplate.update(INSERT_SQL, "test");
             txManager.commit(status);
         } catch (RuntimeException e) {
+            System.out.println(e);
             txManager.rollback(status);
         }
         jdbcTemplate.execute(DROP_TABLE_SQL);
@@ -118,7 +129,6 @@ public class CodeTransactionTest {
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
             @Override
             protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
-
                 try {
                     jdbcTemplate.update(INSERT_SQL, "test");
                 } catch (Exception e) {
@@ -143,7 +153,7 @@ public class CodeTransactionTest {
         addressModel.setUserId(1);
 
         IAddressService addressService = ctx.getBean("addressService", CodeAddressServiceImpl.class);
-       addressService.save(addressModel);
+        addressService.save(addressModel);
         addressService.countAll();
     }
 

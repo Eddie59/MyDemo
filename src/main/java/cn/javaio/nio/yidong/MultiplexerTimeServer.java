@@ -32,15 +32,18 @@ public class MultiplexerTimeServer implements Runnable {
      */
     public MultiplexerTimeServer(int port) {
         try {
-            //教导处
-            selector = Selector.open();
             //学校开学
             servChannel = ServerSocketChannel.open();
             servChannel.configureBlocking(false);
             //学校的端口号
             servChannel.socket().bind(new InetSocketAddress(port), 1024);
+
+            //教导处
+            selector = Selector.open();
+
             //学校有了教导处
             servChannel.register(selector, SelectionKey.OP_ACCEPT);
+
             System.out.println("The time server is start in port : " + port);
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,7 +62,8 @@ public class MultiplexerTimeServer implements Runnable {
                 //selector选择准备好IO的channel（教导处查看报名的学生）
                 selector.select(1000);
                 //获取通道，关心事件的集合
-                //这里的集合就是老师和学生的编号集合，如果key是学生的，那就是老学生来问问题，如果key是老师的，那就是招生办的老师带着一个新生来注册
+                //这里的集合就是老师和学生的编号集合，如果key是学生的，那就是老学生来问问题，
+                // 如果key是老师的，那就是招生办的老师带着一个新生来注册
                 Set<SelectionKey> selectedKeys = selector.selectedKeys();
                 Iterator<SelectionKey> it = selectedKeys.iterator();
                 SelectionKey key = null;

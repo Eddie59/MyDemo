@@ -11,14 +11,21 @@ import java.util.stream.Collectors;
  */
 public class App {
     public static void main(String[] args) {
-//        Properties properties = java.lang.System.getProperties();
-//        System.out.println(properties.getProperty("java.version"));
-//
-//
-//        String queryPropertyStr = "a,b,c,";
-//        Set<String> stream= Arrays.stream(queryPropertyStr.split(","))
-//                //.filter((x) -> !StringUtils.isNoneEmpty(x))
-//                .collect(Collectors.toSet());
+
+        Thread thread=new Thread(()->{
+            while (true){
+                try {
+                    Thread.sleep(2000);
+                    System.out.println(Thread.currentThread().getName()+" "+Thread.currentThread().isDaemon());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+
+        System.out.println(thread.currentThread().getName()+" "+thread.currentThread().isDaemon());
 
     }
 }

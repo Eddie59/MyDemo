@@ -10,7 +10,7 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 ">
 
-    <import resource="classpath:transaction/transaction.xml"/>
+    <import resource="classpath:spring/transaction/transaction.xml"/>
 
     <bean id="addressService" class="spring.transaction.service.declare.DeclareAddressServiceImpl">
         <property name="txmanager" ref="transactionManager"/>
@@ -30,9 +30,11 @@
                        propagation="REQUIRED"
                        isolation="READ_COMMITTED"
                        read-only="false"
-                       timeout="-1"
-            />
-            <tx:method name="*" propagation="REQUIRED" isolation="READ_COMMITTED" read-only="true"/>
+                       timeout="-1"/>
+            <tx:method name="*"
+                       propagation="REQUIRED"
+                       isolation="READ_COMMITTED"
+                       read-only="true"/>
         </tx:attributes>
     </tx:advice>
 
