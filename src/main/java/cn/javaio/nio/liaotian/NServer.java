@@ -18,14 +18,14 @@ public class NServer {
         selector = Selector.open();
 
         // 通过open方法来打开一个未绑定的ServerSocketChannel实例
-        ServerSocketChannel server = ServerSocketChannel.open();
+        ServerSocketChannel channel = ServerSocketChannel.open();
         InetSocketAddress isa = new InetSocketAddress("127.0.0.1", PORT);
         // 将该ServerSocketChannel绑定到指定IP地址
-        server.bind(isa);
+        channel.bind(isa);
         // 设置ServerSocket以非阻塞方式工作
-        server.configureBlocking(false);
+        channel.configureBlocking(false);
         // 将server注册到指定Selector对象，ServerSocketChannel用来监听是否有客户端连接的
-        server.register(selector, SelectionKey.OP_ACCEPT);
+        channel.register(selector, SelectionKey.OP_ACCEPT);
 
         // 监控所有的Channel,有Channel要处理时，返回要处理的数量，并把Channel对象的SelectionKey添加到需要处理的集合中
         while (selector.select() > 0) {
@@ -37,7 +37,7 @@ public class NServer {
                 if (sk.isAcceptable())        // ②
                 {
                     // 调用accept方法接受连接，产生服务器端的SocketChannel
-                    SocketChannel sc = server.accept();
+                    SocketChannel sc = channel.accept();
                     // 设置采用非阻塞模式
                     sc.configureBlocking(false);
                     // 将该SocketChannel注册到selector

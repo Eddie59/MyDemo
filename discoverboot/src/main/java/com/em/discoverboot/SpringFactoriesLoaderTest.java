@@ -16,6 +16,7 @@ import java.util.List;
 @SpringBootApplication
 public class SpringFactoriesLoaderTest {
 
+/*
     public static void main(String... args) throws Exception {
 
 
@@ -36,5 +37,6 @@ public class SpringFactoriesLoaderTest {
 
 
     }
+*/
 
 }

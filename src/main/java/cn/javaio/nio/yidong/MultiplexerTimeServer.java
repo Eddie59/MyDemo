@@ -22,7 +22,6 @@ public class MultiplexerTimeServer implements Runnable {
     //老师 (ServerSocket)
     //学生 (SocketChannel)
     //员工号/学生号（SelectionKey）
-
     private volatile boolean stop;
 
     /**
@@ -102,7 +101,6 @@ public class MultiplexerTimeServer implements Runnable {
             if ((key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) {
                 //这是招生老师的Key,招生老师去找学校给这个同学注册
                 ServerSocketChannel ssc = (ServerSocketChannel)key.channel();
-                //找到学校，报名成功，新同学sc
                 SocketChannel sc = ssc.accept();
                 sc.configureBlocking(false);
                 //在教导处注册，以后教导处能直接找到他，给个新学号
@@ -112,10 +110,10 @@ public class MultiplexerTimeServer implements Runnable {
             }
             //OP_READ说明老学生有问题要问
             else if((key.readyOps() & SelectionKey.OP_READ)== SelectionKey.OP_READ){
-                SocketChannel sc = (SocketChannel)key.channel();
+                SocketChannel channel = (SocketChannel)key.channel();
                 ByteBuffer readBuffer = ByteBuffer.allocate(1024);
                 //读数据，查看学生的提问
-                int readBytes = sc.read(readBuffer);
+                int readBytes = channel.read(readBuffer);
                 if (readBytes > 0) {
                     readBuffer.flip();
                     byte[] bytes = new byte[readBuffer.remaining()];
@@ -123,11 +121,11 @@ public class MultiplexerTimeServer implements Runnable {
                     String body = new String(bytes, "UTF-8");
                     System.out.println("The time server receive order : " + body);
                     String currentTime = "这是答案";
-                    doWrite(sc, currentTime);
+                    doWrite(channel, currentTime);
                 } else if (readBytes < 0) {
                     // 对端链路关闭
                     key.cancel();
-                    sc.close();
+                    channel.close();
                 }
             }
         }

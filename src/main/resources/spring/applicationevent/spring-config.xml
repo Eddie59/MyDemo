@@ -5,4 +5,5 @@
 
     <bean class="spring.applicationevent.EmailLister1"></bean>
 
+    <bean class="spring.applicationlistenerdemo.MyApplicationStartListener"/>
 </beans>

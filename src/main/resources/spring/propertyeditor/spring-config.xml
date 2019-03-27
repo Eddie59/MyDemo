@@ -13,6 +13,7 @@
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
         <property name="customEditors">
             <map>
+                <!--加载的Bean中，只要是Date类型的字段，都需要使用spring.propertyeditor.DateEditor，把配置文件中的字符串转换为Date类型-->
                 <entry key="java.util.Date" value="spring.propertyeditor.DateEditor"/>
             </map>
         </property>
@@ -20,6 +21,7 @@
 
     <bean id="entity" class="spring.propertyeditor.Entity">
         <property name="date" value="2018-06-08"/>
+        <property name="name" value="abc"/>
     </bean>
 
 </beans>

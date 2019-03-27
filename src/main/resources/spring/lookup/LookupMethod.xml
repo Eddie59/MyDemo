@@ -6,7 +6,13 @@
     <bean id="apple" class="spring.lookup.Apple" scope="prototype"/>
     <bean id="banana" class="spring.lookup.Banana" scope="prototype"/>
 
+    <!--没有使用lookup-method，引用的apple永远是一个-->
+    <bean id="fruitPlate0" class="spring.lookup.FruitPlate">
+        <property name="fruit" ref="apple"/>
+    </bean>
+
     <bean id="fruitPlate1" class="spring.lookup.FruitPlate">
+        <!--FruitPlate实例，调用getFruit方法，每次调用new一个Apple的实例-->
         <lookup-method name="getFruit" bean="apple"/>
     </bean>
 

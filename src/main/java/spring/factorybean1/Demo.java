@@ -15,6 +15,8 @@ public class Demo {
     public void go(){
         ApplicationContext context=new ClassPathXmlApplicationContext("spring/factorybean1/factorybean1.xml");
         Person person= context.getBean("person1",Person.class);
-        person.sayHi();
+        System.out.println(person);
+        person= context.getBean("person1",Person.class);
+        System.out.println(person);
     }
 }

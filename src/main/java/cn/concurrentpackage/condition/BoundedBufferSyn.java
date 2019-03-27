@@ -1,4 +1,4 @@
-package cn.reentrantlock;
+package cn.concurrentpackage.condition;
 
 import org.junit.Test;
 

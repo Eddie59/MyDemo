@@ -1,6 +1,5 @@
 package spring.lookup;
 
-import org.springframework.beans.factory.annotation.Lookup;
 
 /**
  * FruitPlate class
@@ -9,10 +8,19 @@ import org.springframework.beans.factory.annotation.Lookup;
  * @date
  */
 public class FruitPlate {
+
+    private Fruit fruit;
+
+    public void setFruit(Fruit _fruid) {
+        this.fruit = _fruid;
+    }
+
     public Fruit getFruit() {
-        return null;
+        return this.fruit;
     }
 
 
-    public Apple getApple(){return null;}
+    public Apple getApple() {
+        return null;
+    }
 }

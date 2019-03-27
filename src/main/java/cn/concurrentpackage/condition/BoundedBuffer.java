@@ -1,4 +1,4 @@
-package cn.reentrantlock;
+package cn.concurrentpackage.condition;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;

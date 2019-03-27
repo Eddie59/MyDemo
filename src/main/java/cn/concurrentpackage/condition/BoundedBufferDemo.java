@@ -1,4 +1,4 @@
-package cn.reentrantlock;
+package cn.concurrentpackage.condition;
 
 /**
  * BoundedBufferDemo class

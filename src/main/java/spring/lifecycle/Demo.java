@@ -1,5 +1,6 @@
 package spring.lifecycle;
 
+import org.springframework.beans.factory.support.InstantiationStrategy;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -23,9 +24,6 @@ public class Demo {
 
         Person per2 = bf.getBean(Person.class);
         System.out.println(per1.getGirlFriend());
-
-
-
 
     }
 }

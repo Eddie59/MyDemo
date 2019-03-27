@@ -28,6 +28,8 @@ public class PropertySourceDemo {
         String s1 = environment.getProperty("file.encoding");
         String s2 = environment.getProperty("java.specification.version");
         String s3 = environment.getProperty("LOCALAPPDATA");
+
+
     }
 
 

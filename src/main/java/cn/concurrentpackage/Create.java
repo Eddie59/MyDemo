@@ -1,7 +1,8 @@
-package cn.multhread;
+package cn.concurrentpackage;
 
 import org.junit.Test;
 
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +34,6 @@ public class Create {
         }).start();
     }
     class ImplRunable implements Runnable{
-
         @Override
         public void run() {
             System.out.println("impl Runnable");

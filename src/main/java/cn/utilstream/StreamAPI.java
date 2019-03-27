@@ -3,6 +3,7 @@ package cn.utilstream;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,6 +14,12 @@ import java.util.stream.Stream;
  * @date
  */
 public class StreamAPI {
+
+    @Test
+    public void Run2(){
+        ConcurrentHashMap<String,String> concurrentHashMap=new ConcurrentHashMap<>();
+        concurrentHashMap.put("a","aVal");
+    }
 
     @Test
     public void Run() {

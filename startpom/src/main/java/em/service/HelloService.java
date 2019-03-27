@@ -19,11 +19,8 @@ public class HelloService {
         this.msg = msg;
     }
 
-
-
     public String sayHello() {
         return "hi:" + msg;
     }
-
 
 }

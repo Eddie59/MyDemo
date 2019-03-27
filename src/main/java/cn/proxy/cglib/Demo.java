@@ -25,5 +25,6 @@ public class Demo {
         HelloWorld helloWorld2=(HelloWorld)enhancer.create();
         helloWorld2.sayHello();
 
+
     }
 }

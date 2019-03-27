@@ -16,12 +16,20 @@ public class Demo {
     {
         ApplicationContext app= new ClassPathXmlApplicationContext("spring/lookup/LookupMethod.xml");
 
+        FruitPlate fruitPlate0= (FruitPlate)app.getBean("fruitPlate0");
+        System.out.println(fruitPlate0.getFruit());
+        System.out.println(fruitPlate0.getFruit());
+        System.out.println(fruitPlate0.getFruit());
+
         FruitPlate fruitPlate1= app.getBean("fruitPlate1",FruitPlate.class);
-        Apple app1=(Apple)fruitPlate1.getFruit();
-        Apple app2=(Apple)fruitPlate1.getFruit();
+        System.out.println(fruitPlate1.getFruit());
+        System.out.println(fruitPlate1.getFruit());
+        System.out.println(fruitPlate1.getFruit());
 
         FruitPlate fruitPlate2= app.getBean("fruitPlate2",FruitPlate.class);
-        fruitPlate2.getFruit();
+        System.out.println(fruitPlate2.getFruit());
+        System.out.println(fruitPlate2.getFruit());
+        System.out.println(fruitPlate2.getFruit());
 
     }
 }
