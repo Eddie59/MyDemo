@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JavaSerialize {
+
     public static void main(String... args) throws IOException, ClassNotFoundException {
         new JavaSerialize().start();
     }
@@ -29,21 +30,20 @@ public class JavaSerialize {
     }
 
     public User getUser() {
-        User u = new User();
         List<User> friends = new ArrayList<User>();
         User f1 = new User();
         f1.setUserName("李四");
         f1.setPassWord("123456");
         f1.setUserInfo("李四是一个很牛逼的人");
+        friends.add(f1);
 
         User f2 = new User();
         f2.setUserName("王五");
         f2.setPassWord("123456");
         f2.setUserInfo("王五是一个很牛逼的人");
-
-        friends.add(f1);
         friends.add(f2);
 
+        User u = new User();
         u.setUserName("张三");
         u.setPassWord("123456");
         u.setUserInfo("张三是一个很牛逼的人");

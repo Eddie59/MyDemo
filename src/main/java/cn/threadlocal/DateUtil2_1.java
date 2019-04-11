@@ -1,4 +1,4 @@
-package main.java.em.threadlocal;
+package cn.threadlocal;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -27,7 +27,7 @@ public class LiuDeHuaProxy {
                 /**
                  33                      * InvocationHandler接口只定义了一个invoke方法，因此对于这样的接口，我们不用单独去定义一个类来实现该接口，
                  34                      * 而是直接使用一个匿名内部类来实现该接口，new InvocationHandler() {}就是针对InvocationHandler接口的匿名实现类
-                 37                      * 在invoke方法编码指定返回的代理对象干的工作
+                 37                      * 在invoke方法指定返回的代理对象干的工作
                  38                      * proxy : 把代理对象自己传递进来
                  39                      * method：把代理对象当前调用的方法传递进来
                  40                      * args:把方法参数传递进来

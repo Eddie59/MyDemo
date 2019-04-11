@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ReentrantLockDemo {
     /**
-     * oncurrent包提供了一个可以替代synchronized关键字的ReentrantLock，
+     * concurrent包提供了一个可以替代synchronized关键字的ReentrantLock，
      简单的说你可以new一个ReentrantLock， 然后通过lock.lock和lock.unlock来获取锁和释放锁；注意必须将unlock放在finally块里面，
      reentrantlock的好处
      1. 是更好的性能，
@@ -27,7 +27,6 @@ public class ReentrantLockDemo {
         {
             final int index = i;
             new Thread(new Runnable() {
-
                 @Override
                 public void run() {
                     for(int j = 0; j < loopcount; ++j)
@@ -50,7 +49,6 @@ public class ReentrantLockDemo {
         }
 
         System.out.println("both have finished....");
-
         System.out.println("SafeSeqWithLock:" + seq.get());
 
     }
@@ -60,20 +58,19 @@ class SafeSeqWithLock{
     private long count = 0;
     private ReentrantLock lock = new ReentrantLock();
 
-    public void inc()
-    {
+    public void inc() {
+        //加锁
         lock.lock();
-
         try{
             count++;
         }
         finally{
+            //释放锁
             lock.unlock();
         }
     }
 
-    public long get()
-    {
+    public long get() {
         return count;
     }
 }

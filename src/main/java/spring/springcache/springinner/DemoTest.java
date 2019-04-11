@@ -3,6 +3,7 @@ package spring.springcache.springinner;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -16,8 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DemoTest {
 
-    private AccountService1 accountService1;
 
+
+    private AccountService1 accountService1;
 
     /**
      * 为毛没有作用呢？

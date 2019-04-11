@@ -21,7 +21,7 @@ public class StringNodeTest {
         }
 
         String content = "abc人民";
-        File file = new File(path + "/abc.txt");
+        File file = new File(path + "/test.txt");
         if (file.exists() == false) {
             try {
                 file.createNewFile();
@@ -42,7 +42,7 @@ public class StringNodeTest {
     @Test
     public void readFile() {
         StringBuilder sb = new StringBuilder();
-        String filePath = "./testdir/abc.txt";
+        String filePath = "./testdir/test.txt";
         File file = new File(filePath);
         if (file.exists() == false) {
             return;

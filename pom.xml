@@ -9,6 +9,7 @@
       <module>MyWeb</module>
         <module>startpom</module>
       <module>pubsub</module>
+        <module>myrpc</module>
     </modules>
     <packaging>pom</packaging>
 

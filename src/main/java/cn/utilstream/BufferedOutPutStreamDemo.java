@@ -11,7 +11,7 @@ public class BufferedOutPutStreamDemo {
     public void demo() throws Exception {
 /*        byte[] bytes = "abc".getBytes();
         //直接使用FileOutputStream写入内容
-        FileOutputStream fileOutputStream = new FileOutputStream("abc.txt", true);
+        FileOutputStream fileOutputStream = new FileOutputStream("test.txt", true);
         fileOutputStream.write(bytes);
 
         //使用BufferedOutputStream包装，先write到内存，然后flush再写入磁盘，提升效率
@@ -24,7 +24,7 @@ public class BufferedOutPutStreamDemo {
      /*   ClassLoader classLoader = this.getClass().getClassLoader();
         String path = classLoader.getResource("").getPath();
         System.out.println(path);
-        FileInputStream inputStream = new FileInputStream("abc.txt");
+        FileInputStream inputStream = new FileInputStream("test.txt");
         byte[] bytes = new byte[inputStream.available()];
         inputStream.read(bytes);
         System.out.println(new String(bytes));
@@ -37,7 +37,7 @@ public class BufferedOutPutStreamDemo {
 
 
 
-        FileReader fileReader = new FileReader("abc.txt");
+        FileReader fileReader = new FileReader("test.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         while (true){
             String line=bufferedReader.readLine();

@@ -8,10 +8,18 @@ package cn.waitnotify;
  */
 public class WaitNotifyTest {
 
+    /**
+     * 在多线程间共享的对象上使用wait
+     */
+    private String[] shareObj = { "true" };
+
+
     class ThreadWait extends Thread {
         public ThreadWait(String name){
+            //线程的名字
             super(name);
         }
+
         @Override
         public void run() {
            synchronized (shareObj) {
@@ -58,10 +66,7 @@ public class WaitNotifyTest {
     }
 
 
-    /**
-     * 在多线程间共享的对象上使用wait
-     */
-    private String[] shareObj = { "true" };
+
 
     public static void main(String[] args) {
         WaitNotifyTest test = new WaitNotifyTest();
@@ -73,8 +78,8 @@ public class WaitNotifyTest {
         threadWait3.setPriority(4);
 
         ThreadNotify threadNotify = test.new ThreadNotify("notify thread");
-
         threadNotify.start();
+
         threadWait1.start();
         threadWait2.start();
         threadWait3.start();

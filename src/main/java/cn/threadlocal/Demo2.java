@@ -1,4 +1,4 @@
-package main.java.em.threadlocal;
+package cn.threadlocal;
 
 /**
  * Demo2 class

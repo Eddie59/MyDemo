@@ -18,7 +18,6 @@ public class StaticFuncRtn {
     public void Run() {
         ApplicationContext app = new ClassPathXmlApplicationContext("spring/methodInvokingFactoryBean/spring-config.xml");
 
-
         Properties properties= java.lang.System.getProperties();
         String version= properties.getProperty("java.version");
         System.out.println(version);
