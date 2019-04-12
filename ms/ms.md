@@ -1,5 +1,11 @@
 #Java语言
 
+###8个基本类型
+byte short int long 
+char 
+float double 
+boolean
+
 ###final关键字
 1，final关键字修饰基本类型，引用类型区别<br/>
 2，final修饰类、方法的用法<br/>
@@ -18,6 +24,18 @@
 3，如果两个对象相同，那么它们的hashCode值一定要相同；如果两个对象的hashCode相同，它们并不一定相同；  
 4，我们一般在覆盖equals的同时也要覆盖hashcode，让他们的逻辑一致，如果没有覆盖会出现什么情况？<br>
 举例，向HashSet<Person>中插入元素时，如果重写了Person的equals方法，用到了name属性，两个name属性一样的person，插入HashSet时，都能插入到HashSet，因为HashSet内部先得到元素的HashCode，找到元素的位置，两个对象的HashCode一定是不一样的，所以存放位置也不同，所以可以插入，这样两个元素比较时，返回true，但可以插入HashSet，HashSet是不允许为重复值的
+
+###重写equal方法的原则
+- 1）自反性
+对于任何非null的引用值x,x.equals(x)必须返回true
+- 2）对称性
+对于任何非null的引用值x和y，当且仅当x.equals(y)为true时，y.equals(x)也为true。
+- 3）传递性
+对于任何非null的引用值x、y、z。如果x.equals(y)==true,y.equals(z)==true,那么x.equals(z)==true。
+- 4）一致性
+对于任何非null的引用值x和y，只要equals的比较操作在对象所用的信息没有被修改，那么多次调用x.eqals(y)就会一致性地返回true,或者一致性的返回false。
+- 5）非空性
+所有比较的对象都不能为空。
 
 ###创建线程的几种方法
 1，实现Runable接口
@@ -69,6 +87,17 @@ join()内部是利用了wait()，所以，它会释放锁，只不过它不用�
 - 3，实现机制不同，synchronized由JVM实现的，Lock由AQS来实现的
 - 4，使用场景也不同，synchronized互斥锁，Lock不仅实现互斥锁，还有可重入锁
 
+###线程通信的几种方式
+- synchronized、Lock
+- join
+- wait/notify，notifyall
+- BlockingQueue
+- Lock和Condition
+    - CountDownLatch
+    - Semaphore信号量机制
+    - ReentrantReadWriteLock
+    - CyclicBarrier
+
 ###说下AQS原理
 
 ###线程池有哪些类型？内部是怎样实现的
@@ -110,7 +139,63 @@ ThreadLocal解决什么问题呢？
 -    3）volatile仅能实现变量的修改可见性,而synchronized则可以保证变量的修改可见性和原子性.
 -    4）volatile不会造成线程的阻塞,而synchronized可能会造成线程的阻塞.
 
+###synchronized实现原理
+#####JVM1.6前
+每个对象有一个监视器锁（monitor）。当monitor被占用时就会处于锁定状态，线程执行monitorenter指令时尝试获取monitor锁，过程如下：
+- 1、如果monitor的进入数为0，则该线程进入monitor，然后将进入数设置为1。
+- 2、如果该线程已经占有该monitor，只是重新进入，则进入monitor的进入数加1.
+- 3、如果其他线程已经占用了monitor，则该线程进入阻塞状态，直到monitor的为0，才能获取monitor的所有权。
+#####JVM1.7后
+
+
+###同步IO和异步IO    阻塞IO和非阻塞IO  同步和异步
+首先一个IO操作其实分成了两个步骤：发起IO请求和服务器内核实际的IO操作
+同步IO和异步IO的区别就在于服务器处理请求的线程，在进行io操作时，是否需要等待服务器内核的I/O操作，如果服务器的accept、read、write操作是要等待内核操作完毕，那么就是同步IO，因此BIO NIO都是同步IO。
+阻塞IO和非阻塞IO的区别在于第一步发起IO请求，阻塞IO是指客户端发起的I/O请求，需要等服务器彻底完成后才能返回；非阻塞是指客户端发起的I/O操作，被服务器调用后立即返回一个状态值，无需等I/O操作彻底完成，需要客户端去遍历获取IO的状态。
+普通的同步和异步的区别（比如同步方法，异步方法）：所谓同步，就是在发出一个功能调用时，在没有得到结果之前，该调用就不返回。异步的概念和同步相对。当一个异步过程调用发出后，调用者不能立刻得到结果。实际处理这个调用的部件在完成后，通过状态、通知和回调来通知调用者。
+
+###介绍下BIO
+
+###介绍下NIO
+NIO叫同步 非阻塞式IO， 同步是指发的请求被服务器的一线程处理，该线程在IO请求时，需要等待内核的IO，所以是同步的；非阻塞是指，多个客户端发起的请求，可能有连接请求，IO请求等不同的请求，服务器用一个线程统一去处理，是连接请求就创建一个channel注册到selector中，如果是io请求就调用相应的IO方法，客户端发起请求后，不需要等待服务器返回，可以做其它操作，自己去循环获取服务器处理结果，所以是非阻塞的。
+优点是一台服务器能同时处理多个请求，且不阻塞客户端
+适合连接请求多，每个请求短的情况
+
+###BIO与NIO区别
+
+
+###java对象从创建到销毁的流程
+当对象在堆创建时，将进入年轻代的Eden Space。垃圾回收器进行垃圾回收时，扫描Eden Space和A Suvivor Space，如果对象仍然存活，则复制到B Suvivor Space，
+如果B Suvivor Space已经满，则复制到Old Gen。同时，在扫描Suvivor Space时，如果对象已经经过了几次的扫描仍然存活，JVM认为其为一个持久化对象，则将其移到Old Gen。
+扫描完毕后，JVM将Eden Space和A Suvivor Space清空，然后交换A和B的角色（即下次垃圾回收时会扫描Eden Space和B Suvivor Space。这么做主要是为了减少内存碎片的产生。
+
+###简单介绍下JDK8的新特性？
+- Lambda表达式
+	使用lambda来实现函数式接口
+- Optional
+	解决空指针问题，链式编程
+- Stream API
+	Stream API是把真正的函数式编程风格引入到Java中。其实简单来说可以把Stream理解为MapReduce
+- 方法引用
+- JVM内存结构上取消了永久代，添加了元空间metaspace
+
+
 #Spring
+
+###Spring用到了java哪些知识
+- 加载spring配置文件时，使用了ResourceLoader，ResourceLoader使用了文件流，文件流
+- 读取完配置文件，通过反射得到BeanDefinition，反射
+- Bean为单例，用到了单例模式
+- AOP用到了java的动态代理，cglib使用了asm
+- 。。。。
+
+###Spring aop的应用场景
+- 验证权限，异常日志处理
+- 缓存
+- 注解型的事务
+- 多数据源切换
+
+
 ###Spring事务默认配置下，没有使用事务的方法，调用使用了事务的方法，事务会生效吗？
 不会<br>
 1，Spring事务帮我们做了什么 2，反射，方法是否有@Transaction注解 3，有注解时，没有注解时
@@ -176,14 +261,21 @@ ThreadLocal解决什么问题呢？
 - 读写分离，将数据分开读写，提升性能
 - 分库分表
 
-###MyISAM、InnoDB区别
-l MyISAM类型不支持事务，而InnoDB类型支持。
-l MyISAM表不支持外键，InnoDB支持
-l MyISAM锁的粒度是表级，而InnoDB支持行级锁定。
-l MyISAM支持全文类型索引，而InnoDB不支持全文索引。(mysql 5.6后innodb支持全文索引)
-MyISAM相对简单，所以在效率上要优于InnoDB，小型应用可以考虑使用MyISAM。当你的数据库有大量的写入、更新操作而查询比较少，数据完整性要求比较高的时候就选择innodb表。当你的数据库主要以查询为主，相比较而言更新和写 入比较少，并且业务方面数据完整性要求不那么严格，就选择mysiam表。
+###MyISAM、InnoDB区别 4个
+-  MyISAM类型不支持事务，而InnoDB类型支持。
+-  MyISAM表不支持外键，InnoDB支持
+-  MyISAM锁的粒度是表级，而InnoDB支持行级锁定。
+-  MyISAM支持全文类型索引，而InnoDB不支持全文索引。(mysql 5.6后innodb支持全文索引)
+当你的数据库有大量的写入、更新操作比查询比较少，数据完整性要求比较高的时候就选择innodb表。
+当你的数据库主要以查询为主，更新和写入比较少，并且业务方面数据完整性要求不那么严格，就选择mysiam表。
 
-###数据库隔离级别
+###数据库事务的4个特性
+- 原子性
+- 一致性
+- 隔离性
+- 持久性
+
+###数据库隔离级别 4种
 1）Serializable (串行化)：可避免脏读、不可重复读、幻读的发生。
 2）Repeatable read (可重复读)：可避免脏读、不可重复读的发生。
 3）Read committed (读已提交)：可避免脏读的发生。
@@ -191,8 +283,9 @@ MyISAM相对简单，所以在效率上要优于InnoDB，小型应用可以考�
 
 
 ###数据库如何实现rollback的？
-数据库在写入数据之前是先讲对数据的改动写入 redo log 和 undo log，然后在操作数据，如果成功提交事务就会把操作写入磁盘；<br>
-如果失败就会根据redo log和undo log逆向还原到事务操作之前的状态。<br>
+数据在写入数据库之前，先对改动数据的写入 redo log 和 undo log(回滚日志)，然后再提交事务<br>
+如果成功提交事务就会把操作写入磁盘；<br>
+如果失败就会根据undo log逆向还原到事务操作之前的状态。<br>
 
 
 #Redis
@@ -240,11 +333,14 @@ Redis采用非阻塞的I/O多路复用技术，可以使用单个Redis线程高�
 ![线程状态转换](images/查找redis的key在哪一台.png)</b>
 
 ###redis持久化策略
-RDB （RedisDataBase）
-AOF (append only log)
-采用RDB机制时，当使用save, shutdown, slave 命令时会触发这个操作，Redis会fork一个进程，把整个db 在这一时间点的快照dump保存下来。恢复时，只会恢复这一时间点的数据，时间点后的数据不会恢复，粒度大
-采用AOF机制时，每次写操作指令，都会持续写到一个日志文件里。（类似于从postgresql等数据库导出sql一样，只记录写操作），crash后利用这日志恢复数据，粒度较小，只有crash之前没有来得及做日志的操作没办法恢复。
-选择的标准，如果系统愿意牺牲一些性能，换取更高的缓存一致性，使用AOF；如果系统性能要求特别高，写操作非常频繁，缓存数据一致性要求又不太高，使用RDB
+- RDB （RedisDataBase）
+- AOF (append only log)
+采用RDB机制时，快照方式，每隔一段时间，Redis会fork一个进程，把整个db 在这一时间点的快照dump下来，存储到硬盘中。
+恢复时，只会恢复这一时间点的数据，时间点后的数据不会恢复，粒度大
+采用AOF机制时，每次写操作指令，都会把写指令写到一个日志文件里，利用日志恢复数据，粒度较小，准确性高，只有crash之前没有来得及做日志的操作没办法恢复。
+#####选择的标准
+如果系统愿意牺牲一些性能，换取更高的缓存一致性，使用AOF；
+如果系统性能要求特别高，写操作非常频繁，Redis数据一致性要求又不太高，使用RDB
 
 ###redis的部署方式，主从，集群
 
@@ -285,8 +381,6 @@ Java语言对内存模型的实现<br>
 - 方法区：所有线程共享。用于存储已被虚拟机加载的类信息、常量、静态变量等数据。又称为非堆（Non – Heap）。方法区又称“永久代”。GC很少在这个区域进行，但不代表不会回收。
 这个区域回收目标主要是针对常量池的回收和对类型的卸载。当内存申请大于实际可用内存，抛OOM。
 - 本地方法栈：线程私有。与Java栈类似，但是不是为Java方法（字节码）服务，而是为本地非Java方法服务。也会抛StackOverflowError和OOM。
-###JVM的参数
-![线程状态转换](images/jvm参数.png)</b>
 
 
 ###可以被作为GC Roots的对象
@@ -302,6 +396,26 @@ Java语言对内存模型的实现<br>
 
 ###年轻代 标记复制算法会不会STW？为什么
 
+###JVM的参数
+- -Xms
+- -Xmx
+- -Xmn
+- -Xss
+- -XX:NewRatio
+- -XX:SurvivoRatio
+- -XX:PermSize
+- -XX:MaxPermSize
+- -XX:MatespaceSize
+- -XX:MaxMatespaceSize
+![线程状态转换](images/jvm参数.png)</b>
+
+###线上工具命令
+- jps
+- jstack pid >> java.txt
+- jstat 
+- jinfo
+- jmap 或者 -XX:HeapDumpOnOutOfMemoryError
+
 ###Minor GC ，Full GC 触发条件
 - Minor GC触发条件：当Eden区满时，触发Minor GC。
 - Full GC触发条件：
@@ -310,13 +424,55 @@ Java语言对内存模型的实现<br>
     - （3）方法区空间不足
     - （4）通过Minor GC后进入老年代的大小大于老年代的可用内存
     - （5）由Eden区、From Space区向To Space区复制时，对象大小大于To Space可用内存，则把该对象转存到老年代，且老年代的可用内存小于该对象大小
+    - JVM1.8以后，Metaspace由于会不断扩容，到-XX:MetaspaceSize参数指定的量时，就会发生FGC
 
+###说下CMS收集器
+CMS(Concurrent Mark Sweep 并发 标记 清理)<br>
+目的：重视服务的响应速度，希望系统停顿时间最短<br>
+过程：
+- 1，初始标记，需要stop the world，标记GCRoot可达的对象，速度很快
+- 2，并发标记，并发的意思是，不需要stop the world，和用户线程并发执行，标记所有对象，用时最长
+- 3，重新标记，需要stop the world，多gc线程并发标记，修复那些并发标记阶段，因用户线程导致的，标记发生变动的那一部分对象
+- 4，并发清除，并发清理没有标记的对象
+优点：响应速度快，系统停顿时间短<br>
+缺点：消耗cpu，会产生内存碎片<br>
+为什么停顿时间短：需要STW只有1，3两个阶段，一个是标记GC Root，一个是重新标记，两阶段速度都比较快<br>
+
+###说下G1收集器
+适合：多核CPU，大内存
+特点：高吞吐量，gc时间短
+#####内存结构
+- 以往的垃圾回收算法，使用的堆内存结构，内存空间需要是连续的，在G1算法中，堆内存被划分为多个大小相等的内存块（Region），每个Region是逻辑连续的一段内存，
+  说明每个Region在运行时都充当了一种角色，Eden，Servivor，Old，Humongous
+#####三种回收模式
+- young gc
+发生在年轻代的GC算法，一般对象（除了巨型对象）都是在eden region中分配内存，当所有eden region被耗尽无法申请内存时，就会触发一次young gc，
+这种触发机制和之前的young gc差不多，执行完一次young gc，活跃对象会被拷贝到survivor region或者晋升到old region中。
+- mixed gc
+当越来越多的对象晋升到老年代old region时，为了避免堆内存被耗尽，虚拟机会触发一个混合的垃圾收集器，即mixed gc，
+该算法并不是一个old gc，除了回收整个young region，还会回收一部分的old region，这里需要注意：是一部分老年代，而不是全部老年代，
+可以选择哪些old region进行收集，从而可以对垃圾回收的耗时时间进行控制。
+那么mixed gc什么时候被触发？
+mixed gc中也有一个阈值参数 -XX:InitiatingHeapOccupancyPercent，当老年代大小占整个堆大小百分比达到该阈值时，会触发一次mixed gc.
+mixed gc的执行过程有点类似cms，主要分为以下几个步骤：
+initial mark: 初始标记过程，整个过程STW，标记了从GC Root可达的对象
+concurrent marking: 并发标记过程，整个过程gc collector线程与应用线程可以并行执行，标记出GC Root可达对象衍生出去的存活对象，并收集各个Region的存活对象信息
+remark: 最终标记过程，整个过程STW，标记出那些在并发标记过程中遗漏的，或者内部引用发生变化的对象
+clean up: 垃圾清除过程，如果发现一个Region中没有存活对象，则把该Region加入到空闲列表中
+- full gc
+如果对象内存分配速度过快，mixed gc来不及回收，导致老年代被填满，就会触发一次full gc，
+G1的full gc算法就是单线程执行的serial old gc，会导致异常长时间的暂停时间，需要进行不断的调优，尽可能的避免full gc
+
+###垃圾收集器的选择
+- 1，服务器，大内存，多核cpu，优先选择G1
+- 2，单线程或client端选serial+serial Old
+- 3，服务端如果CPU资源比较敏感或者注重吞吐量，使用Parallel Scavenage+Parallel Old
+- 4，服务器如果注重回收停顿的时间，使用ParaNew+CMS
 
 #设计模式
 ###建造者模式
 
 #分布式系统常见问题
-
 ###分布式事务怎样处理的？
 - 两阶段提交
 - 拆分为两个本地事务进行

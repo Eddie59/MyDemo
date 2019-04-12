@@ -9,19 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MetaspaceDemo {
-  /*  public static void main(String[] args)
+
+    public static void main(String[] args)
     {
         //模拟fullgc场景
         //持久代空间不足
+        //String.intern() 1.6保存到永久代，1.7保存到堆上，1.8到Metaspace
+        //当前应该设置Metaspace
+        //-XX:+UseSerialGC -Xms20M -Xmx20M -Xmn10m -XX:SurvivorRatio=8 -XX:MetaspaceSize=10m -XX:MaxMetaspaceSize=10m -XX:+PrintGCDetails
+        //
         List<String> list = new ArrayList<String>();
         int i = 0;
         while (true)
         {
             list.add(String.valueOf("ABCD:"  + i ++).intern());
         }
-    }*/
+    }
 
-    public static void main(String[] args)
+   /* public static void main(String[] args)
     {
         //模拟fullgc场景
         //持久代空间不足
@@ -49,5 +54,5 @@ public class MetaspaceDemo {
     static class OOMObject
     {
 
-    }
+    }*/
 }
