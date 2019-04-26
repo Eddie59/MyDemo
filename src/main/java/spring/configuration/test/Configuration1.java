@@ -35,5 +35,7 @@ public class Configuration1 {
         TestBean testBean2 = context.getBean("testBean1", TestBean.class);
         testBean2.sayHello();
         System.out.println(testBean2);
+
+
     }
 }

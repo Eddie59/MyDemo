@@ -15,14 +15,14 @@ public class TestBean2 {
     private String password;
 
     public void sayHello() {
-        System.out.println("TestBean1 sayHello...");
+        System.out.println("TestBean2 sayHello...");
     }
 
     public void start() {
-        System.out.println("TestBean1 初始化。。。");
+        System.out.println("TestBean2 初始化。。。");
     }
 
     public void cleanUp() {
-        System.out.println("TestBean1 销毁。。。");
+        System.out.println("TestBean2 销毁。。。");
     }
 }

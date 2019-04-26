@@ -11,7 +11,6 @@ import org.springframework.lang.Nullable;
  */
 public class DemoFactoryBean implements FactoryBean<Person> {
 
-
     @Nullable
     @Override
     public Person getObject() throws Exception {
@@ -23,4 +22,6 @@ public class DemoFactoryBean implements FactoryBean<Person> {
     public Class<?> getObjectType() {
         return null;
     }
+
+
 }
